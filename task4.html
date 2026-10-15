@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Bootstrap Contact Form</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container">
+    <a href="index.html">Task 0</a>
+    <a href="task1.html">Task 1</a>
+    <a href="task2.html">Task 2</a>
+    <a href="task3.html">Task 3</a>
+    <a href="task4.html">Task 4</a>
+  </div>
+</nav>
+
+
+<div class="container mt-5">
+
+  <h2>Registration Form</h2>
+  <p>Create your account</p>
+
+  <form id="registerForm" novalidate>
+
+    <!-- First Name and Last Name -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="firstName" class="form-label">
+          First Name
+        </label>
+        <input type="text" class="form-control"
+               id="firstName" minlength="2" required>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">
+          Enter at least 2 characters.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="lastName" class="form-label">
+          Last Name
+        </label>
+        <input type="text" class="form-control"
+               id="lastName" minlength="2" required>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">
+          Enter at least 2 characters.
+        </div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control"
+             id="email" placeholder="example@gmail.com"
+             required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">
+        Enter a valid email.
+      </div>
+    </div>
+
+    <!-- Passwords -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="password" class="form-label">
+          Password
+        </label>
+        <input type="password" class="form-control"
+               id="password" minlength="6" required>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">
+          Minimum 6 characters.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="confirmPassword" class="form-label">
+          Confirm Password
+        </label>
+        <input type="password" class="form-control"
+               id="confirmPassword" required>
+        <div class="valid-feedback">
+          Passwords match!
+        </div>
+        <div class="invalid-feedback">
+          Passwords must match.
+        </div>
+      </div>
+    </div>
+
+    <!-- Gender -->
+    <div class="mb-3">
+      <label class="form-label">Gender</label>
+
+      <div class="form-check">
+        <input type="radio" class="form-check-input"
+               name="gender" id="male"
+               value="male" required>
+        <label for="male" class="form-check-label">
+          Male
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input type="radio" class="form-check-input"
+               name="gender" id="female"
+               value="female" required>
+        <label for="female" class="form-check-label">
+          Female
+        </label>
+      </div>
+      <div class="invalid-feedback">
+        Select your gender.
+      </div>
+    </div>
+
+    <!-- Hobbies -->
+    <div class="mb-3">
+      <label class="form-label">Hobbies</label>
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input"
+               id="sports">
+        <label for="sports" class="form-check-label">
+          Sports
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input"
+               id="music">
+        <label for="music" class="form-check-label">
+          Music
+        </label>
+      </div>
+    </div>
+
+    <!-- Country -->
+    <div class="mb-3">
+      <label for="country" class="form-label">
+        Country
+      </label>
+      <select id="country" class="form-select" required>
+        <option value="">Choose country</option>
+        <option value="kz">Kazakhstan</option>
+        <option value="us">USA</option>
+        <option value="uk">UK</option>
+      </select>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">
+        Please select a country.
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">
+      Register
+    </button>
+
+    <button type="reset" class="btn btn-secondary">
+      Reset
+    </button>
+
+  </form>
+</div>
+
+    <div class="mb-3">
+      <label for="message" class="form-label">
+        Message
+      </label>
+      <textarea class="form-control"
+                id="message"
+                rows="4"
+                placeholder="Your message"
+                required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById("registerForm");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const password = document.getElementById("password");
+    const confirm = document.getElementById("confirmPassword");
+
+    if (password.value !== confirm.value) {
+      confirm.setCustomValidity("Passwords do not match");
+    } else {
+      confirm.setCustomValidity("");
+    }
+
+    const fields = form.querySelectorAll(
+      "input:not([type=radio]):not([type=checkbox]), select"
+    );
+
+    fields.forEach(function(field) {
+      if (field.checkValidity()) {
+        field.classList.add("is-valid");
+        field.classList.remove("is-invalid");
+      } else {
+        field.classList.add("is-invalid");
+        field.classList.remove("is-valid");
+      }
+    });
+
+    const gender = form.querySelector(
+      "input[name=gender]:checked"
+    );
+
+    const genderInputs = form.querySelectorAll(
+      "input[name=gender]"
+    );
+
+    genderInputs.forEach(function(input) {
+      input.classList.toggle("is-invalid", !gender);
+      input.classList.toggle("is-valid", !!gender);
+    });
+  });
+
+  form.addEventListener("reset", function() {
+    const fields = form.querySelectorAll(
+      ".is-valid, .is-invalid"
+    );
+
+    fields.forEach(function(field) {
+      field.classList.remove("is-valid", "is-invalid");
+    });
+
+    document.getElementById("confirmPassword")
+      .setCustomValidity("");
+  });
+</script>
+
+</body>
+</html>
